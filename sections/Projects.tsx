@@ -11,7 +11,11 @@ const projects = [
     stack: ["Docker", "Nginx", "Linux", "SSL"],
     site: "https://example.com",
     repo: "https://github.com/usuario/proyecto",
-    metrics: { uptime: "99.9%", deploys: "50+", users: "1K+" },
+    metrics: [
+      { label: "Uptime", value: "99.9%", color: "text-green-400" },
+      { label: "Deploys", value: "50+", color: "text-blue-400" },
+      { label: "Users", value: "1K+", color: "text-purple-400" },
+    ],
   },
   {
     title: "Sistema Interno Autohospedado",
@@ -20,7 +24,11 @@ const projects = [
     stack: ["Docker Compose", "Linux", "Networking", "Backups"],
     site: "https://example.com",
     repo: "https://github.com/usuario/proyecto",
-    metrics: { uptime: "99.8%", deploys: "30+", users: "500+" },
+    metrics: [
+      { label: "Uptime", value: "99.8%", color: "text-green-400" },
+      { label: "Deploys", value: "30+", color: "text-blue-400" },
+      { label: "Users", value: "500+", color: "text-purple-400" },
+    ],
   },
   {
     title: "Portafolio e Infraestructura Personal",
@@ -29,7 +37,24 @@ const projects = [
     stack: ["Next.js", "Docker", "CI/CD", "Traefik"],
     site: "https://example.com",
     repo: "https://github.com/usuario/proyecto",
-    metrics: { uptime: "99.9%", deploys: "100+", users: "2K+" },
+    metrics: [
+      { label: "Uptime", value: "99.9%", color: "text-green-400" },
+      { label: "Deploys", value: "100+", color: "text-blue-400" },
+      { label: "Users", value: "2K+", color: "text-purple-400" },
+    ],
+  },
+  {
+    title: "PyCore ERP",
+    description:
+      "Sistema ERP multi-tenant completo con API REST en Django y frontend React/TypeScript. Cubre ventas, compras, inventario, facturación electrónica, RRHH, CXC/CXP, auditoría y storefront público.",
+    stack: ["Django", "React", "TypeScript", "Docker", "PostgreSQL", "Redis", "WebSockets"],
+    site: "https://pycore.app",
+    repo: "https://github.com/Cyber-Core-Technology/pycore",
+    metrics: [
+      { label: "Módulos", value: "17", color: "text-green-400" },
+      { label: "Commits", value: "111+", color: "text-blue-400" },
+      { label: "Features", value: "23", color: "text-purple-400" },
+    ],
   },
 ];
 
@@ -130,18 +155,12 @@ export default function Projects() {
 
                   {/* Métricas */}
                   <div className="grid grid-cols-3 gap-4 mb-6 pb-6 border-b border-white/5">
-                    <div>
-                      <p className="text-xs text-gray-500 mb-1">Uptime</p>
-                      <p className="text-sm font-semibold text-green-400">{project.metrics.uptime}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-gray-500 mb-1">Deploys</p>
-                      <p className="text-sm font-semibold text-blue-400">{project.metrics.deploys}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-gray-500 mb-1">Users</p>
-                      <p className="text-sm font-semibold text-purple-400">{project.metrics.users}</p>
-                    </div>
+                    {project.metrics.map((metric) => (
+                      <div key={metric.label}>
+                        <p className="text-xs text-gray-500 mb-1">{metric.label}</p>
+                        <p className={`text-sm font-semibold ${metric.color}`}>{metric.value}</p>
+                      </div>
+                    ))}
                   </div>
 
                   {/* Stack tecnológico */}
