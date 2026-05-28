@@ -9,10 +9,10 @@ services:
     env_file:
       - .env
     networks:
-      - proxy
+      - scorpion-portfolio_proxy
     ports:
       - "3000:3000"
 
 networks:
-  proxy:
+  scorpion-portfolio_proxy:
     external: true
